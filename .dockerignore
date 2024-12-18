@@ -1,0 +1,39 @@
+labelbox.db
+
+# Git
+.git
+.gitignore
+
+# Python 
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+venv
+.env
+.venv
+
+# IDEs and editors
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Database and logs
+*.db
+*.sqlite3
+*.log
+
+# Static uploads
+static/uploads/*
+
