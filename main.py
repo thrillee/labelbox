@@ -26,7 +26,13 @@ def get_single_project_details(db: Session, p: Project):
     }
 
 
-def get_projects(db: Session):
+def get_projects(db: Session, search: str | None = None):
+    query = db.query(Project)
+    if search:
+        query = query.filter(Project.project_name.ilike(f"%{search}%"))
+
+    projects = query.all()
+
     projects = db.query(Project).all()
     result = []
     for p in projects:
@@ -55,6 +61,24 @@ def create_project(
     return templates.TemplateResponse(
         "project-list.html",
         {"request": request, "projects": get_projects(db)},
+    )
+
+
+@app.post("/search-projects")
+def search_projects(
+    request: Request, project_search: str = Form(None), db: Session = Depends(get_db)
+):
+    if not project_search:
+        projects = get_projects(db)
+    else:
+        projects = [
+            p
+            for p in get_projects(db)
+            if project_search.lower() in p["project_name"].lower()
+        ]
+
+    return templates.TemplateResponse(
+        "project-list.html", {"request": request, "projects": projects}
     )
 
 

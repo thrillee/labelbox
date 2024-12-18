@@ -13,8 +13,8 @@ class Project(Base):
     __tablename__ = "projects"
 
     id = Column(Integer, primary_key=True, index=True)
-    project_name: str = Column(String, index=True)  # type: ignore
-    description: str = Column(String)  # type: ignore
+    project_name = Column(String, index=True)  # type: ignore
+    description = Column(String)  # type: ignore
 
     def get_project_data_count(self, db: Session):
         return db.query(ProjectData).filter(ProjectData.project_id == self.id).count()
