@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 import os
 import uuid
 
-from .database import get_db, Project, ProjectData, engine, Base
+from database import get_db, Project, ProjectData, engine, Base
 
 app = FastAPI()
 
