@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Annotate: {{ project.project_name }}</title>
+    <script src="https://unpkg.com/htmx.org@1.9.0"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 p-6">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md relative">
+      <h1 class="text-2xl font-bold mb-6">
+        Annotate: {{ project.project_name }}
+      </h1>
+
+      {% if images %} {% for image in images %}
+      <div class="mb-6 p-4 border rounded relative">
+        <img
+          src="/{{ image.file_path }}"
+          alt="{{ image.filename }}"
+          class="max-w-full h-auto mb-4"
+        />
+        <form
+          hx-post="/save-annotation/{{ image.id }}"
+          hx-target="this"
+          hx-indicator="#annotation-save-loader-{{ image.id }}"
+          class="space-y-4"
+        >
+          <textarea
+            name="annotation_data"
+            placeholder="Enter annotation details"
+            class="w-full p-2 border rounded"
+            rows="4"
+          ></textarea>
+          <button
+            type="submit"
+            class="bg-green-500 text-white p-2 rounded hover:bg-green-600 relative"
+          >
+            Save Annotation
+            <div
+              id="annotation-save-loader-{{ image.id }}"
+              class="htmx-indicator absolute inset-0 bg-green-500/50 flex items-center justify-center rounded"
+            >
+              <svg
+                class="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+            </div>
+          </button>
+        </form>
+      </div>
+      {% endfor %} {% else %}
+      <p class="text-center text-gray-600">
+        No images to annotate in this project.
+      </p>
+      {% endif %}
+
+      <div class="mt-6">
+        <a
+          href="/"
+          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Back to Projects
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

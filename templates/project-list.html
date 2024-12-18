@@ -1,0 +1,8 @@
+{% for project in projects %}
+<div
+  class="bg-white border rounded-lg shadow-md p-4 flex flex-col justify-between"
+  id="project-{{project.project_id}}"
+>
+  {% include 'project-card.html' %}
+</div>
+{% endfor %}
