@@ -23,7 +23,6 @@ packaging==24.1
 pandas==2.1.1
 pydantic==2.10.3
 pydantic_core==2.27.1
-Pygments @ file:///private/tmp/pygments-20231008-5534-zuvwpt/Pygments-2.16.1
 python-dateutil==2.8.2
 python-dotenv==1.0.1
 python-multipart==0.0.20
